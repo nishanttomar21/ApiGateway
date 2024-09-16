@@ -1,3 +1,5 @@
+// For this service to run you have to first run the Service Discovery project
+
 /**
  1. TODO [API Gateway]:
      An API Gateway is a crucial component in modern software architectures, particularly in microservices environments. It acts as a single entry point for managing and routing requests to various backend services, simplifying interactions between clients and APIs.
@@ -25,17 +27,40 @@
      - The API Gateway usually serves as a single, stable entry point for clients to access the microservices. Its address is generally static and well-known.
      - API Gateway service will not have any API endpoints, only routes incoming requests to the appropriate microservices and hence we have not added dependency for spring-web (spring-boot-starter-web).
 
+ 3. TODO [Logging]:
+    Log4J 2 - https://medium.com/@bishalf98/log4j2-in-springboot3-095ab6f15763
+    Logback - Logback is the default logging framework. It's a powerful and flexible logging library for Java applications, known for its performance and configurability.
  */
 
 package org.example.apigateway;
 
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@Log4j2
 @SpringBootApplication
 public class ApiGatewayApplication {
+    private static final Logger logger = LogManager.getLogger(ApiGatewayApplication.class);
 
     public static void main(String[] args) {
+        log.warn("Warning");
+        log.info("Info");
+        log.error("Error");
+        log.debug("Debug");
+        logger.info("Starting task execution...");
+
+        try {
+            // Simulate some logic
+            logger.debug("Task in progress...");
+            // Simulate success
+            logger.info("Task completed successfully.");
+        } catch (Exception e) {
+            logger.error("An error occurred while executing the task.", e);
+        }
+
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
 }
